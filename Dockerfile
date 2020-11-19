@@ -21,10 +21,11 @@ RUN bundle install
 ADD . $APP_HOME
 RUN yarn install --check-files
 
-RUN export EDITOR=vi
-RUN export SECRET_KEY_BASE=$(rails credentials:edit --environment production)
-RUN export RAILS_ENV=production bundle exec rake assets:precompile
+ENV EDITOR vi
+ENV RAILS_SERVE_STATIC_FILES true
+ENV SECRET_KEY_BASE bundle exec rails credentials:edit --environment production
+ENV RAILS_ENV production rails assets:precompile
 
 EXPOSE 3000 3035
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ./entrypoint.sh

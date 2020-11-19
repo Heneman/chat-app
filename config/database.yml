@@ -23,7 +23,8 @@ test:
 production:
   <<: *default
   adapter: postgresql
+  database: production
   host: <%= ENV.fetch('DATABASE_HOST') %>
-  post: <%= ENV.fetch('DATABSE_PORT') %>
+  post: <%= ENV.fetch('DATABASE_PORT') %>
   username: <%= ENV.fetch('DATABASE_USERNAME') %>
   password: <%= ENV.fetch('DATABASE_PASSWORD') %>
